@@ -11,31 +11,46 @@
       background: #0d1117;
       color: #c9d1d9;
       line-height: 1.6;
+      scroll-behavior: smooth;
     }
+
     header {
       text-align: center;
       padding: 60px 20px 40px;
       border-bottom: 1px solid #21262d;
     }
+
     header h1 {
       color: #58a6ff;
       margin: 0;
       font-size: 2.4rem;
     }
+
     header p {
       color: #8b949e;
       margin-top: 8px;
     }
+
     section {
       max-width: 800px;
-      margin: 40px auto;
+      margin: 60px auto;
       padding: 0 20px;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s ease-out;
     }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     h2 {
       border-left: 4px solid #58a6ff;
       padding-left: 10px;
       color: #e6edf3;
     }
+
     .project {
       background: #161b22;
       padding: 20px;
@@ -43,27 +58,37 @@
       margin-bottom: 20px;
       box-shadow: 0 0 5px #00000055;
     }
+
     .project h3 {
       color: #79c0ff;
       margin-top: 0;
     }
+
     a {
       color: #58a6ff;
       text-decoration: none;
     }
+
     a:hover {
       text-decoration: underline;
     }
+
     footer {
       text-align: center;
       padding: 30px;
       border-top: 1px solid #21262d;
       color: #8b949e;
     }
+
     img {
       max-width: 100%;
       border-radius: 6px;
       margin-top: 10px;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
@@ -102,13 +127,32 @@
 
   <section id="contacts">
     <h2>Контакты</h2>
-    <p>📧 <a href="mailto:fira.fs@gmail.com">E-Mail</a></p>
-    <p>💼 <a href="https://kwork.ru/user/black81rd" target="_blank">Kwork</a></p>
+    <p>📧 <a href="mailto:black81rd@example.com">black81rd@example.com</a></p>
     <p>🐙 <a href="https://github.com/bLACK81RD" target="_blank">GitHub</a></p>
+    <p>💼 <a href="https://kwork.ru/user/black81rd" target="_blank">Kwork</a></p>
   </section>
 
   <footer>
     © 2025 BLACK81RD. Все права защищены.
   </footer>
+
+  <script>
+    // Плавное появление секций при скролле
+    const sections = document.querySelectorAll('section');
+
+    function revealSections() {
+      const triggerBottom = window.innerHeight * 0.9;
+
+      sections.forEach(section => {
+        const sectionTop = section.getBoundingClientRect().top;
+        if (sectionTop < triggerBottom) {
+          section.classList.add('visible');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', revealSections);
+    window.addEventListener('load', revealSections);
+  </script>
 </body>
 </html>
